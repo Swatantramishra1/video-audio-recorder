@@ -25,14 +25,7 @@ function App() {
 
   return (
     <div className="containerPage">
-      <div className="firstColumn">
-        <VideoRecorder handleSavedData={retrieveRecordingsFromLocal} />
-      </div>
-      {/* <div className="secondColumn">
-        {recordings.map((recording) => (
-          <Card recording={recording} />
-        ))}
-      </div> */}
+       <VideoRecorder handleSavedData={retrieveRecordingsFromLocal} />
     </div>
   );
 }

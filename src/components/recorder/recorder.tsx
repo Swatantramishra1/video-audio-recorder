@@ -95,7 +95,7 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
       mediaRecorder.resume();
       if (videoRef.current) {
         if (pausedTime !== null) {
-          videoRef.current.currentTime = pausedTime; // Set the current time to the stored paused time
+          videoRef.current.currentTime = pausedTime;
         }
         videoRef.current.play();
       }
@@ -112,18 +112,48 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
   const downloadRecording = () => {
     const blob = new Blob(recordedChunks, { type: "video/webm" });
     const url = window.URL.createObjectURL(blob);
-
+    // addWatermark();
     const a = document.createElement("a");
-      a.href = url;
-      a.download = "recorded_video.webm";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-      console.log(url, "url");
-      saveRecordingToLocal();
-      setRecordedChunks([]);
+    a.href = url;
+    a.download = "recorded_video.webm";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    console.log(url, "url");
+    saveRecordingToLocal();
+    setRecordedChunks([]);
   };
+
+//   const addWatermark = () => {
+//     const video = videoRef.current;
+//         const canvas = canvasRef.current;
+//         if (!video || !canvas) return;
+
+//         canvas.width = video.videoWidth;
+//         canvas.height = video.videoHeight;
+//         const ctx = canvas.getContext('2d');
+//         if (!ctx) return;
+
+//         ctx.drawImage(video, 0, 0);
+
+//         const watermarkText = 'Allen Digital'; 
+
+//         ctx.font = '30px Arial';
+//         ctx.fillStyle = 'white';
+//         ctx.fillText(watermarkText, 10, video.videoHeight - 10);
+
+        
+//         const watermarkedVideoUrl = canvas.toDataURL('video/webm');
+
+        
+//         const link = document.createElement('a');
+//         link.href = watermarkedVideoUrl;
+//         link.download = 'watermarked_video.webm';
+//         document.body.appendChild(link);
+//         link.click();
+//         document.body.removeChild(link);
+// };
 
   const saveRecordingToLocal = () => {
     if (recordedChunks.length === 0) return;
@@ -140,7 +170,6 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
     localStorage.setItem("recordings", JSON.stringify(recordings));
     handleSavedData();
   }, [recordings]);
-
 
   return (
     <div className="recorderContainer">
@@ -205,5 +234,3 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
 };
 
 export default VideoRecorder;
-
-
