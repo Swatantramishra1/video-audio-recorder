@@ -169,7 +169,6 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
                 Pause Recording
               </button>
             )}
-            <div>Recording Time: {formatTime(recordingTime)}</div>
           </>
         ) : (
           <>
@@ -207,13 +206,4 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
 
 export default VideoRecorder;
 
-const formatTime = (seconds: number): string => {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds = seconds % 60;
-  return `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
-};
 
-const padZero = (num: number): string => {
-  return num < 10 ? `0${num}` : `${num}`;
-};
