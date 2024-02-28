@@ -15,7 +15,6 @@ const VideoRecorder: React.FC<{ handleSavedData: () => void }> = ({
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
   );
-  const [recordingTime, setRecordingTime] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
